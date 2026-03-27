@@ -1,12 +1,20 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './components/navbar/navbar';
+import { FooterComponent } from './components/footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  imports: [RouterOutlet, NavbarComponent, FooterComponent],
+  template: `
+    <app-navbar />
+    <main>
+      <router-outlet />
+    </main>
+    <app-footer />
+  `,
+  styles: [`
+    main { min-height: calc(100vh - 68px); }
+  `]
 })
-export class App {
-  protected readonly title = signal('tienda_online');
-}
+export class App {}
