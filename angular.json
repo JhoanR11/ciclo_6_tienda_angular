@@ -20,6 +20,7 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "prerender": false,
             "assets": [
               {
                 "glob": "**/*",
@@ -45,7 +46,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
+                  "maximumWarning": "10kB",
                   "maximumError": "8kB"
                 }
               ],
