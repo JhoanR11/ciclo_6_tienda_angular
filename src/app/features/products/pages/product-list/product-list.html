@@ -1,0 +1,17 @@
+<section class="product-list">
+  <h1>Productos</h1>
+
+  @if (loading()) {
+    <p class="state-msg">Cargando...</p>
+  } @else if (error()) {
+    <p class="state-msg error">{{ error() }}</p>
+  } @else if (products().length === 0) {
+    <p class="state-msg">No hay productos disponibles.</p>
+  } @else {
+    <div class="grid">
+      @for (product of products(); track product.id) {
+        <app-product-card [product]="product" />
+      }
+    </div>
+  }
+</section>

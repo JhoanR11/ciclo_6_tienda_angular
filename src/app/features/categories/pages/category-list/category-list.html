@@ -1,0 +1,25 @@
+<section class="category-list">
+  <h1>Categorías</h1>
+
+  @if (loading()) {
+    <p class="state-msg">Cargando...</p>
+  } @else if (error()) {
+    <p class="state-msg error">{{ error() }}</p>
+  } @else if (categories().length === 0) {
+    <p class="state-msg">No hay categorías disponibles.</p>
+  } @else {
+    <div class="grid">
+      @for (category of categories(); track category.id) {
+        <a class="category-card" [routerLink]="['/productos']" [queryParams]="{ categoria: category.slug }">
+          <h3>{{ category.name }}</h3>
+          @if (category.description) {
+            <p>{{ category.description }}</p>
+          }
+          @if (category.children && category.children.length > 0) {
+            <span class="sub-count">{{ category.children.length }} subcategorías</span>
+          }
+        </a>
+      }
+    </div>
+  }
+</section>

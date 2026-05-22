@@ -1,0 +1,102 @@
+.product-detail {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+
+  .back {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 14px;
+    &:hover { text-decoration: underline; }
+  }
+
+  .state-msg {
+    text-align: center;
+    color: var(--color-text-muted);
+    padding: 48px 0;
+    &.error { color: var(--color-error); }
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 24px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .gallery {
+    .main-img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+    }
+
+    .thumbnails {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+
+      img {
+        width: 64px;
+        height: 64px;
+        object-fit: cover;
+        border-radius: var(--radius-sm);
+        border: 2px solid var(--color-border);
+        cursor: pointer;
+        &.active { border-color: var(--color-primary); }
+      }
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .category { font-size: 13px; color: var(--color-text-muted); }
+    h1 { font-size: 26px; color: var(--color-text); margin: 0; }
+    .sku { font-size: 12px; color: var(--color-text-light); }
+
+    .prices {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      .price { font-size: 24px; font-weight: 700; color: var(--color-text); }
+      .original { font-size: 16px; color: var(--color-text-light); text-decoration: line-through; }
+    }
+
+    .description { color: var(--color-text-muted); line-height: 1.6; }
+
+    .variants {
+      h3 { font-size: 14px; margin-bottom: 8px; }
+      .variant-item {
+        display: flex;
+        gap: 16px;
+        padding: 8px 12px;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        margin-bottom: 6px;
+        font-size: 13px;
+        &.inactive { opacity: 0.5; }
+        .stock { margin-left: auto; color: var(--color-text-muted); }
+      }
+    }
+
+    .status {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      background: var(--color-success);
+      color: #fff;
+      width: fit-content;
+      &.unavailable { background: var(--color-error); }
+    }
+  }
+}

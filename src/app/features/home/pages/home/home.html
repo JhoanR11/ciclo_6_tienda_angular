@@ -1,0 +1,63 @@
+<div class="home-layout">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge-geass">Nuevo Lanzamiento</span>
+      <h1>El poder absoluto en <span>Tecnología</span></h1>
+      <p>Domina tu entorno con los mejores equipos. Diseñados para la victoria.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" routerLink="/productos">Comandar Ahora</a>
+        <a class="btn-outline" routerLink="/ofertas">Ver Ofertas</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <!-- Aquí puedes poner un PNG sin fondo de un setup o laptop -->
+      <div class="image-placeholder"></div>
+    </div>
+  </section>
+
+  <!-- Categorías (Tarjetas en lugar de chips) -->
+  @if (categories().length > 0) {
+  <section class="section category-section">
+    <div class="section-header">
+      <h2>Divisiones Tácticas</h2>
+      <a routerLink="/categorias" class="link-action">Ver todas →</a>
+    </div>
+    <div class="categories-grid modern-grid">
+      @for (cat of categories(); track cat.id) {
+      <a class="cat-card" [routerLink]="['/productos']" [queryParams]="{ categoria: cat.slug }">
+        <!-- Sugerencia: Añadir un campo de icono a tus categorías -->
+        <div class="cat-icon">
+          <iconify-icon [icon]="icons.tech"></iconify-icon>
+        </div>
+        <h3>{{ cat.name }}</h3>
+      </a>
+      }
+    </div>
+  </section>
+  }
+
+  <!-- Productos Destacados -->
+  <section class="section featured-section">
+    <div class="section-header">
+      <h2>Equipamiento Destacado</h2>
+      <a routerLink="/productos" class="link-action">Ver todo el catálogo →</a>
+    </div>
+
+    @if (loading()) {
+    <div class="skeleton-grid">
+      <!-- Reemplaza el texto "Cargando..." por tarjetas fantasma -->
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+    } @else {
+    <div class="products-grid">
+      @for (product of products(); track product.id) {
+      <app-product-card [product]="product" />
+      }
+    </div>
+    }
+  </section>
+</div>

@@ -1,0 +1,31 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Marca -->
+    <a class="brand" routerLink="/">
+      <iconify-icon [icon]="icons.brand" class="brand-icon"></iconify-icon> ZeroTech
+    </a>
+
+    <!-- Buscador Global -->
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar equipamiento, marcas...">
+      <button class="search-btn" aria-label="Buscar">
+        <iconify-icon [icon]="icons.search"></iconify-icon>
+      </button>
+    </div>
+
+    <!-- Enlaces Principales -->
+    <ul class="nav-links">
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a></li>
+      <li><a routerLink="/productos" routerLinkActive="active">Arsenal</a></li>
+      <li><a routerLink="/categorias" routerLinkActive="active">Divisiones</a></li>
+    </ul>
+
+    <!-- Acciones de Usuario -->
+    <div class="nav-actions">
+      <button class="btn-icon" aria-label="Carrito">
+        <iconify-icon [icon]="icons.cart"></iconify-icon>
+      </button>
+      <a routerLink="/login" class="btn-primary login-btn">Iniciar Sesión</a>
+    </div>
+  </div>
+</nav>

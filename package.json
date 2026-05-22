@@ -31,9 +31,12 @@
     "@angular/platform-server": "^20.1.0",
     "@angular/router": "^20.1.0",
     "@angular/ssr": "^20.1.6",
+    "@iconify-icons/mdi": "^1.2.48",
     "express": "^5.1.0",
+    "iconify-icon": "^3.0.2",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zone.js": "^0.15.1"
   },
   "devDependencies": {
     "@angular/build": "^20.1.6",

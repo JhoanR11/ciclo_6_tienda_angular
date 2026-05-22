@@ -1,0 +1,38 @@
+.category-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+
+  h1 { margin-bottom: 24px; }
+
+  .state-msg {
+    text-align: center;
+    color: var(--color-text-muted);
+    padding: 48px 0;
+    &.error { color: var(--color-error); }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .category-card {
+    padding: 20px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: box-shadow 0.2s, border-color 0.2s;
+
+    &:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary);
+    }
+
+    h3 { margin: 0 0 8px; font-size: 16px; }
+    p { font-size: 13px; color: var(--color-text-muted); margin: 0 0 8px; }
+    .sub-count { font-size: 12px; color: var(--color-primary); }
+  }
+}

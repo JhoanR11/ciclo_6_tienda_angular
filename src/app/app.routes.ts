@@ -3,31 +3,19 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./pages/home/home').then(m => m.HomeComponent)
+    loadComponent: () => import('./features/home/pages/home/home').then(m => m.Home)
   },
   {
     path: 'productos',
-    loadComponent: () => import('./pages/productos/productos').then(m => m.ProductosComponent)
+    loadComponent: () => import('./features/products/pages/product-list/product-list').then(m => m.ProductList)
   },
   {
-    path: 'productos/:id',
-    loadComponent: () => import('./pages/producto-detalle/producto-detalle').then(m => m.ProductoDetalleComponent)
+    path: 'productos/:slug',
+    loadComponent: () => import('./features/products/pages/product-detail/product-detail').then(m => m.ProductDetail)
   },
   {
-    path: 'carrito',
-    loadComponent: () => import('./pages/carrito/carrito').then(m => m.CarritoComponent)
-  },
-  {
-    path: 'checkout',
-    loadComponent: () => import('./pages/checkout/checkout').then(m => m.CheckoutComponent)
-  },
-  {
-    path: 'pedido-confirmado',
-    loadComponent: () => import('./pages/pedido-confirmado/pedido-confirmado').then(m => m.PedidoConfirmadoComponent)
-  },
-  {
-    path: 'dashboard',
-    loadComponent: () => import('./pages/dashboard/dashboard').then(m => m.DashboardComponent)
+    path: 'categorias',
+    loadComponent: () => import('./features/categories/pages/category-list/category-list').then(m => m.CategoryList)
   },
   {
     path: '**',

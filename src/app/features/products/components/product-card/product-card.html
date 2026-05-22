@@ -1,0 +1,22 @@
+<article class="product-card">
+  <a [routerLink]="['/productos', product().slug]">
+    <img
+      [src]="product().primary_image?.url ?? 'assets/no-image.png'"
+      [alt]="product().name"
+      loading="lazy"
+    />
+  </a>
+  <div class="product-info">
+    <span class="category">{{ product().category?.name }}</span>
+    <h3><a [routerLink]="['/productos', product().slug]">{{ product().name }}</a></h3>
+    <div class="prices">
+      <span class="price">{{ product().min_price | currency:'PEN':'S/ ' }}</span>
+      @if (product().min_price < product().base_price) {
+        <span class="original">{{ product().base_price | currency:'PEN':'S/ ' }}</span>
+      }
+    </div>
+    @if (!product().is_active) {
+      <span class="badge-inactive">No disponible</span>
+    }
+  </div>
+</article>
