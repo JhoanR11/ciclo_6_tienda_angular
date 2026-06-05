@@ -1,65 +1,80 @@
 <section class="product-detail">
   @if (loading()) {
-    <p class="state-msg">Cargando...</p>
+    <app-product-detail-skeleton />
   } @else if (error()) {
-    <p class="state-msg error">{{ error() }}</p>
+    <div class="state-error">
+      <span class="state-error__icon">⚠</span>
+      <p>{{ error() }}</p>
+    </div>
   } @else if (product()) {
-    <a class="back" routerLink="/productos">← Volver</a>
+    <a class="back" routerLink="/productos">
+      <span class="back__arrow">←</span> Volver a productos
+    </a>
 
     <div class="layout">
-      <!-- Galería -->
       <div class="gallery">
-        <img
-          class="main-img"
-          [src]="selectedImage() ?? 'assets/no-image.png'"
-          [alt]="product()!.name"
-        />
+        <div class="gallery__main-wrap">
+          <img
+            class="gallery__main-img"
+            [src]="selectedImage() ?? 'assets/no-image.png'"
+            [alt]="product()!.name"
+          />
+          @if (!product()!.is_active) {
+            <div class="gallery__overlay">
+              <span>No disponible</span>
+            </div>
+          }
+        </div>
+
         @if (product()!.images && product()!.images!.length > 1) {
-          <div class="thumbnails">
+          <div class="gallery__thumbs">
             @for (img of product()!.images; track img.id) {
-              <img
-                [src]="img.url"
-                [alt]="product()!.name"
+              <button
+                class="gallery__thumb-btn"
                 [class.active]="selectedImage() === img.url"
                 (click)="selectedImage.set(img.url)"
-              />
+              >
+                <img [src]="img.url" [alt]="product()!.name" />
+              </button>
             }
           </div>
         }
       </div>
 
-      <!-- Info -->
       <div class="info">
-        <span class="category">{{ product()!.category?.name }}</span>
-        <h1>{{ product()!.name }}</h1>
-        <p class="sku">SKU: {{ product()!.sku }}</p>
+        @if (product()!.category) {
+          <span class="info__category">{{ product()!.category!.name }}</span>
+        }
 
-        <div class="prices">
-          <span class="price">{{ product()!.min_price | currency:'PEN':'S/ ' }}</span>
+        <h1 class="info__title">{{ product()!.name }}</h1>
+        <p class="info__sku">SKU: {{ product()!.sku }}</p>
+
+        <div class="info__prices">
+          <span class="info__price">{{ product()!.min_price | currency:'PEN':'S/ ':'1.2-2' }}</span>
           @if (product()!.min_price < product()!.base_price) {
-            <span class="original">{{ product()!.base_price | currency:'PEN':'S/ ' }}</span>
+            <span class="info__price-original">{{ product()!.base_price | currency:'PEN':'S/ ':'1.2-2' }}</span>
           }
         </div>
 
         @if (product()!.description) {
-          <p class="description">{{ product()!.description }}</p>
+          <p class="info__description">{{ product()!.description }}</p>
         }
 
-        <!-- Variantes -->
         @if (product()!.variants && product()!.variants!.length > 0) {
-          <div class="variants">
-            <h3>Variantes</h3>
+          <div class="info__variants">
+            <h3 class="info__variants-title">Variantes</h3>
             @for (variant of product()!.variants; track variant.id) {
-              <div class="variant-item" [class.inactive]="!variant.is_active">
-                <span>{{ variant.sku }}</span>
-                <span>{{ variant.price | currency:'PEN':'S/ ' }}</span>
-                <span class="stock">Stock: {{ variant.stock }}</span>
+              <div class="variant-item" [class.variant-item--inactive]="!variant.is_active">
+                <span class="variant-item__sku">{{ variant.sku }}</span>
+                <span class="variant-item__price">{{ variant.price | currency:'PEN':'S/ ':'1.2-2' }}</span>
+                <span class="variant-item__stock">Stock: {{ variant.stock }}</span>
               </div>
             }
           </div>
         }
 
-        <div class="status" [class.unavailable]="!product()!.is_active">
+        <div class="info__status" [class.info__status--unavailable]="!product()!.is_active">
+          <span class="info__status-dot"></span>
           {{ product()!.is_active ? 'Disponible' : 'No disponible' }}
         </div>
       </div>

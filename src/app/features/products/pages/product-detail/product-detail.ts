@@ -3,10 +3,11 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../../../core/models/product.model';
+import { ProductDetailSkeleton } from '../../../../shared/components/product-detail-skeleton/product-detail-skeleton';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [RouterLink, CurrencyPipe],
+  imports: [RouterLink, CurrencyPipe, ProductDetailSkeleton],
   templateUrl: './product-detail.html',
   styleUrl: './product-detail.scss'
 })

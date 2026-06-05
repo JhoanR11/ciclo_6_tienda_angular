@@ -1,22 +1,47 @@
-<article class="product-card">
-  <a [routerLink]="['/productos', product().slug]">
+<article class="product-card" [class.inactive]="!product().is_active">
+
+  <a class="card-image-wrap" [routerLink]="['/productos', product().slug]" tabindex="-1">
     <img
       [src]="product().primary_image?.url ?? 'assets/no-image.png'"
       [alt]="product().name"
-      loading="lazy"
+      loading="eager"
+      class="card-image"
     />
-  </a>
-  <div class="product-info">
-    <span class="category">{{ product().category?.name }}</span>
-    <h3><a [routerLink]="['/productos', product().slug]">{{ product().name }}</a></h3>
-    <div class="prices">
-      <span class="price">{{ product().min_price | currency:'PEN':'S/ ' }}</span>
-      @if (product().min_price < product().base_price) {
-        <span class="original">{{ product().base_price | currency:'PEN':'S/ ' }}</span>
-      }
-    </div>
-    @if (!product().is_active) {
-      <span class="badge-inactive">No disponible</span>
+
+    @if (discount()) {
+      <span class="badge badge--discount">-{{ discount() }}%</span>
     }
+
+    @if (!product().is_active) {
+      <div class="card-overlay">
+        <span>No disponible</span>
+      </div>
+    }
+
+    @if (product().is_service) {
+      <span class="badge badge--service">Servicio</span>
+    }
+  </a>
+
+  <div class="card-body">
+    <span class="card-category">{{ product().category?.name ?? '—' }}</span>
+
+    <h3 class="card-title">
+      <a [routerLink]="['/productos', product().slug]">{{ product().name }}</a>
+    </h3>
+
+    <div class="card-footer">
+      <div class="card-prices">
+        <span class="price-main">{{ product().min_price | currency:'PEN':'S/ ':'1.2-2' }}</span>
+        @if (discount()) {
+          <span class="price-original">{{ product().base_price | currency:'PEN':'S/ ':'1.2-2' }}</span>
+        }
+      </div>
+
+      <button class="btn-cart" [disabled]="!product().is_active" aria-label="Agregar al carrito">
+        <iconify-icon [icon]="icons.cart"></iconify-icon>
+      </button>
+    </div>
   </div>
+
 </article>

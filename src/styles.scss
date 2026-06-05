@@ -1,4 +1,5 @@
 @use 'styles/variables';
+@use 'styles/skeletons';
 
 /* Animaciones */
 @keyframes fadeInUp {
@@ -39,4 +40,14 @@ body {
   background: var(--color-primary-dark);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
+}
+
+a {
+  text-decoration: none;
+
+}
+button {
+  background-color: transparent;
+  color: #fff;
+
 }

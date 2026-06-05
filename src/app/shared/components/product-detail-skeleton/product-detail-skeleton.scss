@@ -1,0 +1,128 @@
+@use '../../../../styles/skeletons' as *;
+
+.skeleton-detail {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.sk-line {
+  @include shimmer;
+  border-radius: var(--radius-sm);
+}
+
+.sk-back {
+  @include shimmer;
+  width: 140px;
+  height: 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
+}
+
+.sk-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 24px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sk-gallery {
+  &__main-wrap {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  &__main-img {
+    @include shimmer;
+    width: 100%;
+    aspect-ratio: 1;
+    display: block;
+    border-radius: 0;
+  }
+
+  &__thumbs {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  &__thumb {
+    @include shimmer;
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-sm);
+  }
+}
+
+.sk-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__category {
+    width: 30%;
+    height: 12px;
+  }
+
+  &__title {
+    width: 85%;
+    height: 26px;
+
+    &--short { width: 55%; }
+  }
+
+  &__sku {
+    width: 20%;
+    height: 10px;
+  }
+
+  &__prices {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  &__price-main     { width: 110px; height: 28px; }
+  &__price-original { width: 75px;  height: 16px; }
+
+  &__desc {
+    width: 100%;
+    height: 13px;
+
+    &--short { width: 70%; }
+  }
+
+  &__variants {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__variants-title {
+    width: 80px;
+    height: 12px;
+    margin-bottom: 4px;
+  }
+
+  &__status {
+    width: 110px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+  }
+}
+
+.sk-variant-item {
+  @include shimmer;
+  width: 100%;
+  height: 41px;
+  border-radius: var(--radius-sm);
+}

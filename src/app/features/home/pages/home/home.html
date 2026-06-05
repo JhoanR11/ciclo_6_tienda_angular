@@ -1,63 +1,91 @@
 <div class="home-layout">
-  <!-- Hero Section -->
+
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
-      <span class="badge-geass">Nuevo Lanzamiento</span>
+      <span class="badge-geass">
+        <span class="badge-dot"></span> Nuevo Lanzamiento
+      </span>
       <h1>El poder absoluto en <span>Tecnología</span></h1>
       <p>Domina tu entorno con los mejores equipos. Diseñados para la victoria.</p>
       <div class="hero-actions">
         <a class="btn-primary" routerLink="/productos">Comandar Ahora</a>
         <a class="btn-outline" routerLink="/ofertas">Ver Ofertas</a>
       </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">500+</span>
+          <span class="stat-label">Productos</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value">12k+</span>
+          <span class="stat-label">Clientes</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value">4.9★</span>
+          <span class="stat-label">Valoración</span>
+        </div>
+      </div>
     </div>
     <div class="hero-image">
-      <!-- Aquí puedes poner un PNG sin fondo de un setup o laptop -->
-      <div class="image-placeholder"></div>
+      <div class="hero-device">
+        <div class="device-glow"></div>
+        <iconify-icon [icon]="icons.heroDevice" class="device-icon"></iconify-icon>
+        <span class="device-label">MacBook Pro M3</span>
+        <span class="device-price">S/ 284.74</span>
+      </div>
     </div>
   </section>
 
-  <!-- Categorías (Tarjetas en lugar de chips) -->
-  @if (categories().length > 0) {
-  <section class="section category-section">
+  <!-- Categorías -->
+  <section class="section">
     <div class="section-header">
-      <h2>Divisiones Tácticas</h2>
+      <h2 class="section-title">Divisiones Tácticas</h2>
       <a routerLink="/categorias" class="link-action">Ver todas →</a>
     </div>
-    <div class="categories-grid modern-grid">
-      @for (cat of categories(); track cat.id) {
-      <a class="cat-card" [routerLink]="['/productos']" [queryParams]="{ categoria: cat.slug }">
-        <!-- Sugerencia: Añadir un campo de icono a tus categorías -->
-        <div class="cat-icon">
-          <iconify-icon [icon]="icons.tech"></iconify-icon>
-        </div>
-        <h3>{{ cat.name }}</h3>
-      </a>
-      }
-    </div>
-  </section>
-  }
 
-  <!-- Productos Destacados -->
-  <section class="section featured-section">
-    <div class="section-header">
-      <h2>Equipamiento Destacado</h2>
-      <a routerLink="/productos" class="link-action">Ver todo el catálogo →</a>
-    </div>
-
-    @if (loading()) {
-    <div class="skeleton-grid">
-      <!-- Reemplaza el texto "Cargando..." por tarjetas fantasma -->
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-    </div>
+    @if (loadingCategories()) {
+      <div class="categories-grid">
+        @for (_ of skeletonItems; track $index) {
+          <app-skeleton-category-card />
+        }
+      </div>
     } @else {
-    <div class="products-grid">
-      @for (product of products(); track product.id) {
-      <app-product-card [product]="product" />
-      }
-    </div>
+      <div class="categories-grid">
+        @for (cat of categories(); track cat.id) {
+          <a class="cat-card" [routerLink]="['/productos']" [queryParams]="{ categoria: cat.slug }">
+            <div class="cat-icon-wrap">
+              <iconify-icon [icon]="icons.tech"></iconify-icon>
+            </div>
+            <h3>{{ cat.name }}</h3>
+          </a>
+        }
+      </div>
     }
   </section>
+
+  <!-- Productos Destacados -->
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Equipamiento Destacado</h2>
+      <a routerLink="/productos" class="link-action">Ver catálogo →</a>
+    </div>
+
+    @if (loadingProducts()) {
+      <div class="products-grid">
+        @for (_ of skeletonItems; track $index) {
+          <app-skeleton-card />
+        }
+      </div>
+    } @else {
+      <div class="products-grid">
+        @for (product of products(); track product.id) {
+          <app-product-card [product]="product" />
+        }
+      </div>
+    }
+  </section>
+
 </div>

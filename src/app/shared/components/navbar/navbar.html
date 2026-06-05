@@ -1,31 +1,46 @@
 <nav class="navbar">
   <div class="navbar-container">
-    <!-- Marca -->
+
     <a class="brand" routerLink="/">
-      <iconify-icon [icon]="icons.brand" class="brand-icon"></iconify-icon> ZeroTech
+      <iconify-icon [icon]="icons.brand" class="brand-icon"></iconify-icon>
+      <span class="brand-name">Zero<span class="brand-accent">Tech</span></span>
     </a>
 
-    <!-- Buscador Global -->
-    <div class="search-bar">
-      <input type="text" placeholder="Buscar equipamiento, marcas...">
-      <button class="search-btn" aria-label="Buscar">
-        <iconify-icon [icon]="icons.search"></iconify-icon>
-      </button>
+    <div class="search-bar" [class.search-bar--active]="searchFocused()">
+      <iconify-icon [icon]="icons.search" class="search-icon"></iconify-icon>
+      <input
+        type="text"
+        placeholder="Buscar en el arsenal..."
+        (focus)="searchFocused.set(true)"
+        (blur)="searchFocused.set(false)"
+      />
+      <kbd class="search-kbd">⌘K</kbd>
     </div>
 
-    <!-- Enlaces Principales -->
     <ul class="nav-links">
-      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a></li>
-      <li><a routerLink="/productos" routerLinkActive="active">Arsenal</a></li>
-      <li><a routerLink="/categorias" routerLinkActive="active">Divisiones</a></li>
+      <li>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          Inicio
+        </a>
+      </li>
+      <li>
+        <a routerLink="/productos" routerLinkActive="active">Arsenal</a>
+      </li>
+      <li>
+        <a routerLink="/categorias" routerLinkActive="active">Divisiones</a>
+      </li>
     </ul>
 
-    <!-- Acciones de Usuario -->
     <div class="nav-actions">
       <button class="btn-icon" aria-label="Carrito">
         <iconify-icon [icon]="icons.cart"></iconify-icon>
+        <span class="cart-badge">3</span>
       </button>
-      <a routerLink="/login" class="btn-primary login-btn">Iniciar Sesión</a>
+      <a routerLink="/login" class="btn-login">
+        <iconify-icon [icon]="icons.user"></iconify-icon>
+        Iniciar sesión
+      </a>
     </div>
+
   </div>
 </nav>

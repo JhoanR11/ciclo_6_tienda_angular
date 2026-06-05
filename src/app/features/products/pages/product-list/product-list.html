@@ -1,12 +1,21 @@
 <section class="product-list">
-  <h1>Productos</h1>
+  <h1 class="product-list__title">Productos</h1>
 
   @if (loading()) {
-    <p class="state-msg">Cargando...</p>
+    <div class="grid">
+      @for (item of skeletonItems(); track item) {
+        <app-skeleton-card />
+      }
+    </div>
   } @else if (error()) {
-    <p class="state-msg error">{{ error() }}</p>
+    <div class="state-error">
+      <span class="state-error__icon">⚠</span>
+      <p>{{ error() }}</p>
+    </div>
   } @else if (products().length === 0) {
-    <p class="state-msg">No hay productos disponibles.</p>
+    <div class="state-empty">
+      <p>No hay productos disponibles.</p>
+    </div>
   } @else {
     <div class="grid">
       @for (product of products(); track product.id) {

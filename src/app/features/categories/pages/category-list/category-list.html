@@ -1,25 +1,64 @@
 <section class="category-list">
-  <h1>Categorías</h1>
+
+  <div class="page-header">
+    <div>
+      <h1>Divisiones Tácticas</h1>
+      <p class="page-subtitle">Explora nuestro arsenal organizado por categoría</p>
+    </div>
+  </div>
 
   @if (loading()) {
-    <p class="state-msg">Cargando...</p>
+    <div class="grid">
+      @for (_ of skeletonItems; track $index) {
+        <app-skeleton-category-card />
+      }
+    </div>
+
   } @else if (error()) {
-    <p class="state-msg error">{{ error() }}</p>
+    <div class="state-box state-box--error">
+      <iconify-icon [icon]="icons.error"></iconify-icon>
+      <p>{{ error() }}</p>
+      <button class="btn-retry" (click)="load()">Reintentar</button>
+    </div>
+
   } @else if (categories().length === 0) {
-    <p class="state-msg">No hay categorías disponibles.</p>
+    <div class="state-box">
+      <iconify-icon [icon]="icons.empty"></iconify-icon>
+      <p>No hay categorías disponibles por el momento.</p>
+    </div>
+
   } @else {
     <div class="grid">
       @for (category of categories(); track category.id) {
         <a class="category-card" [routerLink]="['/productos']" [queryParams]="{ categoria: category.slug }">
-          <h3>{{ category.name }}</h3>
-          @if (category.description) {
-            <p>{{ category.description }}</p>
-          }
-          @if (category.children && category.children.length > 0) {
-            <span class="sub-count">{{ category.children.length }} subcategorías</span>
-          }
+
+          <div class="cat-icon-wrap">
+            <iconify-icon [icon]="icons.tech"></iconify-icon>
+          </div>
+
+          <div class="cat-body">
+            <h3>{{ category.name }}</h3>
+
+            @if (category.description) {
+              <p class="cat-desc">{{ category.description }}</p>
+            }
+          </div>
+
+          <div class="cat-footer">
+            @if (category.children && category.children.length > 0) {
+              <span class="sub-count">
+                <iconify-icon [icon]="icons.sub"></iconify-icon>
+                {{ category.children.length }} subcategorías
+              </span>
+            }
+            <span class="cat-arrow">
+              <iconify-icon [icon]="icons.arrow"></iconify-icon>
+            </span>
+          </div>
+
         </a>
       }
     </div>
   }
+
 </section>
